@@ -1,0 +1,46 @@
+Script started on 2021-12-02 01:24:08+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="141" LINES="42"]
+]0;lis@f6linux11: ~lis@f6linux11:~$ lscd ~/a5p -r UNHELPFUL_noTweet ~/a5/data_without_tweet[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2@UN[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cd ~/a5[K[K[K[K[K[K[K[Kcat[K[K[Kcat number.sh
+cat amazon_reviews_us_Books_v1_02.tsv | sed '1d' | awk -F'\t' 'BEGIN {max=min=1} {if($9>max) {max=$9}; if($9< min) {min=$9}; total+=$9; count+=1} END {print"min ", min, " max ", max, " avg ", total/count}'
+]0;lis@f6linux11: ~lis@f6linux11:~$ chmod +x number.sh
+]0;lis@f6linux11: ~lis@f6linux11:~$ ./number.sht./number.shi./number.shm./number.she./number.sh ./number.sh
+min  0  max  15835  avg  9.33468
+
+real	0m19.369s
+user	0m18.198s
+sys	0m2.217s
+]0;lis@f6linux11: ~lis@f6linux11:~$ cat numbers.py 
+from itertools import islice
+
+
+with open("amazon_reviews_us_Books_v1_02.tsv") as f:
+    numbers = []
+    for line in islice(f, 1, None):
+        numbers.append(int(line.split("\t")[8]))
+    numbers.sort()
+
+count = len(numbers)
+max_num = max(numbers)
+min_num = min(numbers)
+sum_of_nums = sum(numbers)
+avg = sum_of_nums/float(count)
+
+print("min %s max %s avg %s" % (min_num, max_num, avg))
+]0;lis@f6linux11: ~lis@f6linux11:~$ time python3 py[K[Knumbers.py 
+min 0 max 15835 avg 9.33467921636312
+
+real	0m12.512s
+user	0m11.062s
+sys	0m1.152s
+]0;lis@f6linux11: ~lis@f6linux11:~$ exit
+
+
+Answer:
+----------------------------------------
+The real runtime of the shell script is about 12s while the runtime of the Python program is about 19s, so the shell script runs faster on my input file.
+
+
+
+
+
+
+Script done on 2021-12-02 01:26:02+00:00 [COMMAND_EXIT_CODE="0"]
